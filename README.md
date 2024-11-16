@@ -3,6 +3,22 @@
    **Note:** This repository contains the project details,Files and codes of the Datascience process, Cloud resource configuration, notification simulating script from dash board etc.. for the  AI-Powered Maintenance System for OEM(Original Equipment manufacturers).
  
 ----
+# project structure
+AI-Powered-Maintenance-System-for-OEM-Original-Equipment-Manufacturers-/
+├── Data-science-process/
+│   ├── Datageneration.py                # Script for generating synthetic or simulated data
+│   ├── engine_data.csv                  # CSV file containing engine data
+│   ├── large_simulated_vehicle_data.csv # CSV file with simulated vehicle data
+│   ├── predictive_maintainence.ipynb    # Jupyter notebook for AI-based predictive maintenance
+│
+├── cloud-resources/
+│   ├── Notification/
+│   │   └── Notification.py              # Script to send maintenance notifications
+│   ├── azure-cli-config.yaml            # YAML file that defines Azure resources and deployment steps
+│
+├── LICENSE                              # Project license file
+├── README.md                            # Main documentation file describing the entire project
+
 ## Problem Statement:
 
 - The current vehicle maintenance model operates on either scheduled or reactive maintenance. In scheduled maintenance, vehicles are serviced after a fixed period, regardless of the actual condition of the vehicle parts. This leads to inefficiencies such as replacing parts too early or missing critical failures, resulting in unexpected breakdowns. Reactive maintenance, where repairs happen only after something has failed, often leads to higher repair costs, vehicle downtime, and customer dissatisfaction.
