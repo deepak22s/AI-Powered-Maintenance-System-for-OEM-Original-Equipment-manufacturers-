@@ -1,6 +1,6 @@
 # AI-Powered Maintenance System for OEM(Original Equipment manufacturers)
 
-   **Note:** This repo only contains the project details,Files and codes of the Datascience process of the  AI-Powered Maintenance System for OEM(Original Equipment manufacturers).
+   **Note:** This repository contains the project details,Files and codes of the Datascience process, Cloud resource configuration, notification simulating script from dash board etc.. for the  AI-Powered Maintenance System for OEM(Original Equipment manufacturers).
  
 ----
 ## Problem Statement:
@@ -77,13 +77,55 @@ The dataset contains following columns:
 
 ### Usage
 
-Instructions on how to run the project:
+Instructions on how to run the data science project:
 
 1. This project is just a prototype for the datascience process of AI-Powered Predictive Maintenance System so the file only contains a jupyternotebook.
 2. You can directly download the Jupyter notebook and use it. 
-### Results
 
-- Mentioned at the end of Jupyternotebook in the repo
+## **Deploying Azure Resources**
+
+The cloud resources for the system are defined in the `cloud-resources/azure-cli-config.yaml` file. Follow these steps to deploy them:
+
+### **Prerequisites**
+
+1. **Azure CLI**: Install the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
+2. **Azure Account**: Ensure you have an active Azure account and are logged in via the Azure CLI:
+   ```bash
+   az login
+   ```
+
+3. **Resource Group**: Create a resource group (if not already created):
+   ```bash
+   az group create --name IoTResourceGroup --location <region>
+   ```
+   Replace `<region>` with your desired Azure region (e.g., `eastus`, `westus`).
+
+---
+
+### **Deploy Resources**
+
+1. Navigate to the project directory in your terminal:
+   ```bash
+   cd <cd AI-Powered-Maintenance-System-for-OEM-Original-Equipment-manufacturers-/cloud-resources>
+   ```
+
+2. Deploy the resources using the Azure CLI command:
+   ```bash
+   az deployment group create --resource-group IoTResourceGroup --template-file cloud-resources/azure-cli-config.yaml
+   ```
+
+---
+
+### **Verify Deployment**
+
+1. After the deployment completes, log in to the [Azure Portal](https://portal.azure.com).
+2. Navigate to the **IoTResourceGroup** to view all the deployed resources.
+
+
+
+
+### Results
+-  Model results  mentioned at the end of Jupyternotebook in the repo
 
 
 ### License
