@@ -1,3 +1,5 @@
+#This script is used to generate the data but we didnt used this in the project
+
 import pandas as pd
 import random
 from datetime import datetime, timedelta
