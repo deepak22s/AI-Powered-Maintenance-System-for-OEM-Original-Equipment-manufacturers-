@@ -1,0 +1,117 @@
+$schema: "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#"
+contentVersion: "1.0.0.0"
+resources:
+
+# Resource Group
+- type: "Microsoft.Resources/resourceGroups"
+  apiVersion: "2021-04-01"
+  name: "IoTResourceGroup"
+  location: "eastus"
+  properties: {}
+
+# IoT Hub
+- type: "Microsoft.Devices/IotHubs"
+  apiVersion: "2021-07-01"
+  name: "saideepakpemmasaniIoTHub"
+  location: "eastus"
+  sku:
+    name: "S1"
+    tier: "Standard"
+    capacity: 1
+  properties: {}
+
+# Event Hub Namespace
+- type: "Microsoft.EventHub/namespaces"
+  apiVersion: "2021-06-01-preview"
+  name: "saideepakpemmasaniEventHubNamespace"
+  location: "eastus"
+  sku:
+    name: "Standard"
+    capacity: 1
+
+# Event Hub
+- type: "Microsoft.EventHub/namespaces/eventhubs"
+  apiVersion: "2021-06-01-preview"
+  name: "[concat('saideepakpemmasaniEventHubNamespace', '/saideepakpemmasaniEventHub')]"
+  dependsOn:
+    - "[resourceId('Microsoft.EventHub/namespaces', 'saideepakpemmasaniEventHubNamespace')]"
+  properties:
+    partitionCount: 4
+    messageRetentionInDays: 7
+
+# Blob Storage Account
+- type: "Microsoft.Storage/storageAccounts"
+  apiVersion: "2021-08-01"
+  name: "saideepakpemmasaniStorageAccount"
+  location: "eastus"
+  kind: "StorageV2"
+  sku:
+    name: "Standard_LRS"
+
+# Blob Storage Container
+- type: "Microsoft.Storage/storageAccounts/blobServices/containers"
+  apiVersion: "2021-08-01"
+  name: "[concat('saideepakpemmasaniStorageAccount', '/default/streamingdata')]"
+  dependsOn:
+    - "[resourceId('Microsoft.Storage/storageAccounts', 'saideepakpemmasaniStorageAccount')]"
+  properties: {}
+
+# Cosmos DB
+- type: "Microsoft.DocumentDB/databaseAccounts"
+  apiVersion: "2021-06-15"
+  name: "saideepakpemmasaniCosmosDB"
+  location: "eastus"
+  kind: "GlobalDocumentDB"
+  properties:
+    databaseAccountOfferType: "Standard"
+    locations:
+      - locationName: "eastus"
+        failoverPriority: 0
+
+# Cosmos DB SQL Database
+- type: "Microsoft.DocumentDB/databaseAccounts/sqlDatabases"
+  apiVersion: "2021-06-15"
+  name: "[concat('saideepakpemmasaniCosmosDB', '/DeviceRegistryDB')]"
+  dependsOn:
+    - "[resourceId('Microsoft.DocumentDB/databaseAccounts', 'saideepakpemmasaniCosmosDB')]"
+  properties: {}
+
+# Cosmos DB Container
+- type: "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers"
+  apiVersion: "2021-06-15"
+  name: "[concat('saideepakpemmasaniCosmosDB', '/DeviceRegistryDB/DeviceContainer')]"
+  dependsOn:
+    - "[resourceId('Microsoft.DocumentDB/databaseAccounts/sqlDatabases', 'saideepakpemmasaniCosmosDB', 'DeviceRegistryDB')]"
+  properties:
+    partitionKey:
+      paths:
+        - "/deviceId"
+
+# Stream Analytics Job
+- type: "Microsoft.StreamAnalytics/streamingjobs"
+  apiVersion: "2021-10-01-preview"
+  name: "saideepakpemmasaniStreamAnalytics"
+  location: "eastus"
+  dependsOn:
+    - "[resourceId('Microsoft.Devices/IotHubs', 'saideepakpemmasaniIoTHub')]"
+  properties:
+    sku:
+      name: "Standard"
+
+# Web App (Dashboard)
+- type: "Microsoft.Web/serverfarms"
+  apiVersion: "2021-02-01"
+  name: "saideepakpemmasaniAppServicePlan"
+  location: "eastus"
+  sku:
+    name: "F1"
+    tier: "Free"
+
+- type: "Microsoft.Web/sites"
+  apiVersion: "2021-02-01"
+  name: "saideepakpemmasaniWebApp"
+  location: "eastus"
+  dependsOn:
+    - "[resourceId('Microsoft.Web/serverfarms', 'saideepakpemmasaniAppServicePlan')]"
+  properties:
+    serverFarmId: "[resourceId('Microsoft.Web/serverfarms', 'saideepakpemmasaniAppServicePlan')]"
