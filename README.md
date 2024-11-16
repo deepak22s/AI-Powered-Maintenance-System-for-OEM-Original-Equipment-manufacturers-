@@ -1,23 +1,27 @@
 # AI-Powered Maintenance System for OEM(Original Equipment manufacturers)
 
-   **Note:** This repository contains the project details,Files and codes of the Datascience process, Cloud resource configuration, notification simulating script from dash board etc.. for the  AI-Powered Maintenance System for OEM(Original Equipment manufacturers).
- 
-----
-# project structure
-AI-Powered-Maintenance-System-for-OEM-Original-Equipment-Manufacturers-/
-├── Data-science-process/
-│   ├── Datageneration.py                # Script for generating synthetic or simulated data
-│   ├── engine_data.csv                  # CSV file containing engine data
-│   ├── large_simulated_vehicle_data.csv # CSV file with simulated vehicle data
-│   ├── predictive_maintainence.ipynb    # Jupyter notebook for AI-based predictive maintenance
-│
-├── cloud-resources/
-│   ├── Notification/
-│   │   └── Notification.py              # Script to send maintenance notifications
-│   ├── azure-cli-config.yaml            # YAML file that defines Azure resources and deployment steps
-│
-├── LICENSE                              # Project license file
-├── README.md                            # Main documentation file describing the entire project
+### Project Overview:
+This repository contains the details, files, and code for the AI-Powered Maintenance System designed for Original Equipment Manufacturers (OEM). The system leverages predictive maintenance using machine learning and AI techniques to optimize the maintenance schedules and improve the reliability of equipment, particularly vehicles and engines, by forecasting failures based on historical data.
+
+### Project Structure:
+
+```
+AI-Powered-Maintenance-System-for-OEM-Original-Equipment-Manufacturers/
+├── Data-science-process/                  # Directory for data science-related scripts and notebooks
+│   ├── Datageneration.py                   # Script for generating synthetic or simulated data
+│   ├── engine_data.csv                     # CSV file containing engine data (historical)
+│   ├── large_simulated_vehicle_data.csv    # CSV file with simulated vehicle data (for model training)
+│   ├── predictive_maintainence.ipynb       # Jupyter notebook for AI-based predictive maintenance model
+├── cloud-resources/                       # Directory for cloud configuration and resources
+│   ├── Notification/                      # Directory for notification-related resources
+│   │   └── Notification.py                # Script to send maintenance notifications
+│   ├── azure-cli-config.yaml              # YAML file defining Azure resources and deployment steps
+├── LICENSE                                # Project license file
+├── README.md                              # Main documentation file describing the entire project
+```
+
+  
+
 
 ## Problem Statement:
 
